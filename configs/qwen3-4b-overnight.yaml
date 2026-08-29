@@ -8,7 +8,7 @@ batch_size: 1
 iters: 2400
 learning_rate: 1.0e-4
 grad_checkpoint: true
-steps_per_report: 50
+steps_per_report: 10
 steps_per_eval: 800
 save_every: 400
 adapter_path: models/qwen3-4b-sft
