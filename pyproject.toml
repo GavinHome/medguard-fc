@@ -1,0 +1,10 @@
+[project]
+name = "medguard-fc"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "datasets>=5.0.1",
+    "huggingface-hub>=1.29.0",
+    "mlx-lm>=0.31.3",
+    "transformers>=5.16.1",
+]

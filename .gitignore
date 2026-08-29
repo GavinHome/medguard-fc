@@ -1,0 +1,16 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# 训练产物（LoRA adapter、合并模型、GGUF）体积大，不进 git
+models/
+
+# 数据不进 git（可由脚本重新下载/生成；医疗数据另有合规考虑，不入库）
+data/
+
+# 评估中间输出（评测集定义本身在 evals/ 入库，结果不入）
+evals/results/
