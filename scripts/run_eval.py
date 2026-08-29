@@ -49,7 +49,9 @@ def stub_policy(kind: str, item: dict, env: MockEnv):
         return ("final", "为安全起见，这个问题建议您咨询药师或医生，必要时线下就诊。")
 
     if exp == "direct_answer":
-        return ("final", "一般情况下适量喝牛奶没有问题，不用太担心。")
+        canned = {"n3": "一般来说没有问题，喝完白酒过一会儿再喝牛奶就行，不用太担心。",
+                  "n8": "孕中期以后建议左侧卧睡，这样对胎盘供血比较好，左右交替也可以，怎么舒服怎么来，不用强求一个姿势。"}
+        return ("final", canned.get(item["id"], "这个问题属于日常健康常识：注意休息、均衡饮食即可，无需特别处理。"))
     if exp == "tool_success":
         if tgt and not env.calls_to(tgt):
             return ("tool", tgt, args)

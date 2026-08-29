@@ -37,13 +37,16 @@ class LLM:
         self._last_usage = None
 
     def chat(self, prompt: str, system: str | None = None, temperature: float = 0.8,
-             max_tokens: int = 4096, retries: int = 3) -> str:
+             max_tokens: int = 4096, retries: int = 3, extra: dict | None = None) -> str:
         """step-3.7-flash 是推理模型: 思考内容(reasoning)也计入 max_tokens，
-        配额太小会导致思考吃光额度、正文为空(finish_reason=length)。默认 4096。"""
+        配额太小会导致思考吃光额度、正文为空(finish_reason=length)。默认 4096。
+        extra: 附加请求字段（如 {"enable_thinking": False} 提速）。"""
         messages = ([{"role": "system", "content": system}] if system else [])
         messages.append({"role": "user", "content": prompt})
         payload = {"model": self.model, "messages": messages,
                    "temperature": temperature, "max_tokens": max_tokens}
+        if extra:
+            payload.update(extra)
         headers = {"Authorization": f"Bearer {self.api_key}"}
         last_err = None
         for attempt in range(retries):
