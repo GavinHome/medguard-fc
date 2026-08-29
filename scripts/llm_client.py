@@ -11,7 +11,9 @@
 import json
 import os
 import re
+import threading
 import time
+from collections import deque
 from pathlib import Path
 
 import requests
@@ -35,6 +37,22 @@ class LLM:
         self.base_url = (base_url or os.environ["STEPFUN_BASE_URL"]).rstrip("/")
         self.model = model or os.environ.get("STEPFUN_MODEL", "step-3.7-flash")
         self._last_usage = None
+        # RPM 节流: 低档位 key（如 10 RPM）必须全进程共享节流，否则并发打爆窗口
+        self.rpm = int(os.environ.get("STEPFUN_RPM", "0") or 0)
+        self._ts: deque = deque()
+        self._lock = threading.Lock()
+
+    def _throttle(self) -> None:
+        if not self.rpm:
+            return
+        with self._lock:
+            now = time.time()
+            while self._ts and now - self._ts[0] >= 60:
+                self._ts.popleft()
+            wait = max(0.0, 60 - (now - self._ts[0]) + 0.05) if len(self._ts) >= self.rpm else 0.0
+            self._ts.append(time.time())
+        if wait > 0:
+            time.sleep(wait)
 
     def chat(self, prompt: str, system: str | None = None, temperature: float = 0.8,
              max_tokens: int = 4096, retries: int = 3, extra: dict | None = None) -> str:
@@ -51,6 +69,7 @@ class LLM:
         last_err = None
         for attempt in range(retries):
             try:
+                self._throttle()
                 r = requests.post(f"{self.base_url}/chat/completions",
                                   json=payload, headers=headers, timeout=90)
                 r.raise_for_status()
