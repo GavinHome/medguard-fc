@@ -256,11 +256,24 @@ def main():
                  for l in (ROOT / "evals" / "eval_set_v1.jsonl").read_text().splitlines() if l.strip()}
 
     specs = build_plan(tools)
+    seen = set(eval_norm)
+    ckpt = ROOT / "data" / "raw" / "trajs_partial.jsonl"
+    ckpt.parent.mkdir(parents=True, exist_ok=True)
+
+    # ---- 断点续跑: 每条 spec 对应一行结果（成功或失败），按行数对齐恢复 ----
+    done_lines = ckpt.read_text().splitlines() if ckpt.exists() else []
+    trajs = [json.loads(l)["traj"] for l in done_lines if l.strip() and json.loads(l).get("ok")]
+    for t in trajs:
+        seen.add(re.sub(r"[\s，。？！、；：\"'（）()?!,.:;]+", "", t["query"]).lower())
+    if done_lines:
+        print(f"断点续跑: 已有 {len(done_lines)} 条记录，跳过对应 specs", flush=True)
+        specs = specs[len(done_lines):]
+    ckpt_f = open(ckpt, "a", encoding="utf-8")
+
     if args.limit:
         specs = specs[: args.limit]
     llm = LLM()
-    trajs, fails = [], 0
-    seen = set(eval_norm)
+    fails = 0
     t0 = time.time()
 
     def work(spec):
@@ -270,10 +283,14 @@ def main():
         for i, traj in enumerate(ex.map(work, specs), 1):
             if traj:
                 trajs.append(traj)
+                ckpt_f.write(json.dumps({"ok": True, "traj": traj}, ensure_ascii=False) + "\n")
             else:
                 fails += 1
-            if i % 200 == 0:
+                ckpt_f.write(json.dumps({"ok": False}, ensure_ascii=False) + "\n")
+            ckpt_f.flush()
+            if i % 100 == 0:
                 print(f"  {i}/{len(specs)} 成功{len(trajs)} 失败{fails} ({time.time()-t0:.0f}s)", flush=True)
+    ckpt_f.close()
 
     print(f"轨迹合成: {len(trajs)}/{len(specs)} (失败{fails})，开始拆分与落盘…", flush=True)
     samples = []
