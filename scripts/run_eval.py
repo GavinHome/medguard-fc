@@ -15,6 +15,7 @@ import datetime
 import json
 import re
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -79,21 +80,64 @@ def stub_policy(kind: str, item: dict, env: MockEnv):
 # ---------------- 真实模型 agent 循环 ----------------
 
 class RealModel:
+    """带持久 KV 缓存的模型包装。
+
+    system+工具 schema 前缀在所有条目/轮次间相同且极长（~8-10K token）。
+    mlx-lm 0.31 的 generate 传 prompt_cache 时只追加、不做前缀匹配，
+    因此手动实现：每轮算新 prompt 与已缓存序列的公共前缀 → 裁掉过期尾部
+    → 只预填充增量。多轮工具场景预填充量降约一个数量级。
+    """
+
     def __init__(self, model_id: str):
         from transformers import AutoTokenizer
         from mlx_lm import load
+        from mlx_lm.models.cache import make_prompt_cache, trim_prompt_cache
         self.tok = AutoTokenizer.from_pretrained(model_id)
         self.model, _ = load(model_id)
+        self.cache = make_prompt_cache(self.model)   # 每层一个 KVCache 的列表
+        self.trim = lambda n: trim_prompt_cache(self.cache, n)
+        self.cache_len = 0        # 缓存中当前有效 token 数
+        self.prev_tokens = []     # 上次写入缓存的完整 token 序列
 
     def turn(self, messages: list[dict], tool_defs: list[dict]) -> str:
-        kwargs = dict(tools=tool_defs, add_generation_prompt=True, tokenize=False)
-        try:
-            prompt = self.tok.apply_chat_template(messages, enable_thinking=False, **kwargs)
+        from mlx_lm import stream_generate
+        from mlx_lm.models.cache import make_prompt_cache, trim_prompt_cache
+        tmpl_kwargs = dict(tools=tool_defs, add_generation_prompt=True)
+        try:    # Qwen3: 关闭思考模式，避免 <think> 吃掉生成额度
+            tokens = self.tok.apply_chat_template(messages, enable_thinking=False,
+                                                  **tmpl_kwargs)
         except Exception:
-            prompt = self.tok.apply_chat_template(messages, **kwargs)
-        from mlx_lm import generate
-        text = generate(self.model, self.tok, prompt=prompt, max_tokens=400, verbose=False)
-        return THINK_PAT.sub("", text).strip()
+            tokens = self.tok.apply_chat_template(messages, **tmpl_kwargs)
+        if hasattr(tokens, "input_ids"):
+            tokens = tokens.input_ids
+        if isinstance(tokens, str):
+            tokens = self.tok.encode(tokens)
+        tokens = list(tokens)
+
+        common = 0
+        for a, b in zip(self.prev_tokens, tokens):
+            if a != b:
+                break
+            common += 1
+        if common >= len(tokens):            # 理论上不会发生，防御
+            common = len(tokens) - 1
+        if self.cache_len > common:
+            trimmed = trim_prompt_cache(self.cache, self.cache_len - common)
+            if trimmed != self.cache_len - common:
+                self.cache = make_prompt_cache(self.model)   # 裁剪失败兜底
+                self.cache_len, common = 0, 0
+            else:
+                self.cache_len = common
+        delta = tokens[common:]
+
+        parts, gen_ids = [], []
+        for resp in stream_generate(self.model, self.tok, prompt=delta,
+                                    max_tokens=400, prompt_cache=self.cache):
+            parts.append(resp.text)
+            gen_ids.append(resp.token)
+        self.cache_len += len(delta) + len(gen_ids)
+        self.prev_tokens = tokens + gen_ids
+        return THINK_PAT.sub("", "".join(parts)).strip()
 
 
 def parse_tool_call(text: str):
@@ -178,11 +222,13 @@ def main():
 
     records = []
     for i, item in enumerate(items, 1):
+        t0 = time.time()
         rec = run_item(model, item, args.safety_prompt, args.max_turns)
+        rec["elapsed_s"] = round(time.time() - t0, 1)
         records.append(rec)
         flag = "OK " if (rec["a1_solved"] or rec["a2_handled"]) and not rec["violations"] else "!! "
-        print(f"[{i:>2}/{len(items)}] {flag}{rec['id']} ({rec['risk_class']})"
-              + (f"  ⚠ {rec['violations']}" if rec["violations"] else ""))
+        print(f"[{i:>3}/{len(items)}] {flag}{rec['id']} ({rec['risk_class']}) {rec['elapsed_s']}s"
+              + (f"  ⚠ {rec['violations']}" if rec["violations"] else ""), flush=True)
 
     report = {
         "model": args.model if isinstance(model, str) else model.__class__.__name__,
