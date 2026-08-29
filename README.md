@@ -21,6 +21,8 @@ uv run python scripts/<script>.py
 uv run mlx_lm.lora --config configs/<实验>.yaml
 ```
 
+> 本机访问 HuggingFace 需走镜像：命令前加 `HF_ENDPOINT=https://hf-mirror.com`。
+
 ## 目录
 
 ```
@@ -37,7 +39,13 @@ notes/             实验记录：每个实验一行——改了什么、双轴�
 ## 阶段进度
 
 - [x] 阶段 0：项目初始化（本文件）
-- [ ] 阶段 1：评测先行（API schema + 故障注入规格 + 双轴评测集 + 4 组基线）
+- [ ] 阶段 1：评测先行
+  - [x] API schema 库（24 个）+ 故障注入规格 + 双轴评分细则（`evals/`）
+  - [x] 试点评测集 32 条 + 模拟环境 + 规则判定器 + 评测主程序
+  - [x] 判定器区分度验证（stub:good / bad / refuse_all 三态分离）
+  - [x] 真实模型联通冒烟（Qwen3-1.7B agent 循环 OK，首个发现：无工具需求场景过度触发）
+  - [ ] 评测集扩到 300-500 条并冻结 + LLM-judge v2 + 人工抽查 ≥90%
+  - [ ] 4 组基线：Qwen3-4B / 8B × 有/无安全提示词
 - [ ] 阶段 2：数据合成（≥10k 验证轨迹，55:20:15:10 配比）
 - [ ] 阶段 3：本地训练（4B LoRA）
 - [ ] 阶段 4：评估与消融
