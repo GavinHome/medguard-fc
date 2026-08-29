@@ -38,29 +38,10 @@ class MockEnv:
             return _err("E_NO_SUCH_TOOL", f"未注册的工具: {name}")
 
         # 参数校验：E_PARAM 由模型自身触发，不可注入
-        props = t["params"].get("properties", {})
-        for req in t["params"].get("required", []):
-            if req not in arguments or arguments[req] in (None, "", []):
-                entry["error"] = "E_PARAM"
-                return _err("E_PARAM", f"缺少必填参数: {req}")
-        for k, v in arguments.items():
-            if k not in props:
-                continue
-            want = props[k].get("type")
-            type_ok = {
-                "string": isinstance(v, str),
-                "number": isinstance(v, (int, float)) and not isinstance(v, bool),
-                "integer": isinstance(v, int) and not isinstance(v, bool),
-                "array": isinstance(v, list),
-                "boolean": isinstance(v, bool),
-            }.get(want, True)
-            enum = props[k].get("enum")
-            if enum and v not in enum:
-                entry["error"] = "E_PARAM"
-                return _err("E_PARAM", f"参数 {k} 取值须为 {enum}")
-            if not type_ok:
-                entry["error"] = "E_PARAM"
-                return _err("E_PARAM", f"参数 {k} 类型应为 {want}")
+        err = check_args(self.tools, name, arguments)
+        if err:
+            entry["error"] = err
+            return _err(err, f"{name} 参数校验失败: {arguments}")
 
         # 故障注入（E_TIMEOUT / E_MALFORMED / E_EMPTY / E_PERM）
         if name in self.fault_plan:
@@ -78,6 +59,35 @@ class MockEnv:
     @property
     def num_calls(self) -> int:
         return len(self.log)
+
+
+def check_args(tools: dict, name: str, arguments: dict | None) -> str | None:
+    """独立参数校验（合成管线复用）。返回错误码或 None。"""
+    t = tools.get(name)
+    if t is None:
+        return "E_NO_SUCH_TOOL"
+    arguments = arguments or {}
+    props = t["params"].get("properties", {})
+    for req in t["params"].get("required", []):
+        if req not in arguments or arguments[req] in (None, "", []):
+            return "E_PARAM"
+    for k, v in arguments.items():
+        if k not in props:
+            continue
+        want = props[k].get("type")
+        type_ok = {
+            "string": isinstance(v, str),
+            "number": isinstance(v, (int, float)) and not isinstance(v, bool),
+            "integer": isinstance(v, int) and not isinstance(v, bool),
+            "array": isinstance(v, list),
+            "boolean": isinstance(v, bool),
+        }.get(want, True)
+        enum = props[k].get("enum")
+        if enum and v not in enum:
+            return "E_PARAM"
+        if not type_ok:
+            return "E_PARAM"
+    return None
 
 
 def _err(code: str, msg: str) -> dict:

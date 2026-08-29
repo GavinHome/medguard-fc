@@ -14,3 +14,6 @@ data/
 
 # 评估中间输出（评测集定义本身在 evals/ 入库，结果不入）
 evals/results/
+
+# API keys（绝不入库）
+.env
