@@ -1,0 +1,21 @@
+# 阶段3扩展: 8B 同子集配方验证 — 回答"配方在更强底座上是否有增益"
+# 主对比: 8B微调 vs 8B基线(72.7/74.6/12.1) 同底座配对; 次对比: 与4B微调的增益迁移
+# 预计 ~15h (21s/步 × 2400步), 结果决定租卡全量是否执行
+model: mlx-community/Qwen3-8B-4bit
+train: true
+data: data/processed/overnight
+mask_prompt: true
+max_seq_length: 2560
+batch_size: 1
+iters: 2400
+learning_rate: 1.0e-4
+grad_checkpoint: true
+steps_per_report: 50
+steps_per_eval: 800
+save_every: 400
+adapter_path: models/qwen3-8b-sft-subset
+lora_parameters:
+  rank: 32
+  alpha: 64
+  dropout: 0.0
+  scale: 10.0
