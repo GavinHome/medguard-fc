@@ -1,0 +1,21 @@
+# 阶段3扩展: 4B × v12分层子集(4300轨迹, v2占32%) — 验证v2定向数据有效性
+# 对照: 4B基线(51.4/33.2/22.4) 与 4B-v1微调(67.9/73.0/16.3)
+# 若A1回升+B继续降 → v2配方有效; 预计 ~32h
+model: mlx-community/Qwen3-4B-4bit
+train: true
+data: data/processed/v12sub
+mask_prompt: true
+max_seq_length: 2560
+batch_size: 1
+iters: 8700
+learning_rate: 1.0e-4
+grad_checkpoint: true
+steps_per_report: 50
+steps_per_eval: 2900
+save_every: 1000
+adapter_path: models/qwen3-4b-v12
+lora_parameters:
+  rank: 32
+  alpha: 64
+  dropout: 0.0
+  scale: 10.0
