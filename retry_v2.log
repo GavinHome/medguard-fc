@@ -1,0 +1,25 @@
+第1轮: 重试 218 条失败行
+Traceback (most recent call last):
+  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/scripts/retry_failed_v2.py", line 74, in <module>
+    main()
+    ~~~~^^
+  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/scripts/retry_failed_v2.py", line 59, in main
+    for k, (i, traj) in enumerate(ex.map(work, false_idx), 1):
+                        ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yangxiaomin/.local/share/uv/python/cpython-3.13.9-macos-aarch64-none/lib/python3.13/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/yangxiaomin/.local/share/uv/python/cpython-3.13.9-macos-aarch64-none/lib/python3.13/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ~~~~~~~~~~^^^^^^^^^
+  File "/Users/yangxiaomin/.local/share/uv/python/cpython-3.13.9-macos-aarch64-none/lib/python3.13/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/Users/yangxiaomin/.local/share/uv/python/cpython-3.13.9-macos-aarch64-none/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/Users/yangxiaomin/.local/share/uv/python/cpython-3.13.9-macos-aarch64-none/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/scripts/retry_failed_v2.py", line 54, in work
+    return i, synth_v2(llm, specs[i], tools, seeds, seen)
+                            ~~~~~^^^
+IndexError: list index out of range

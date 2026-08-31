@@ -188,6 +188,28 @@ def _example_value(p):
     return p.get("description", "示例")[:12] or "示例"
 
 
+def build_specs_v2(tools: dict, seed: int = 43) -> list[dict]:
+    """配额: medium 1500 + normal 1500 (缺口类), medium 的故障轮转含 E_PERM。
+    固定种子的确定性序列 — 主管线与 retry_failed_v2.py 必须用同一 seed 才能按行对齐。"""
+    random.seed(seed)
+    by_risk = {"medium": [], "low": []}
+    for name, t in tools.items():
+        by_risk.setdefault(t["risk"], []).append(name)
+    for v in by_risk.values():
+        v.sort()
+    specs = []
+    mids = by_risk["medium"]
+    for i in range(1500):
+        api = mids[i % len(mids)]
+        faults = ["E_PERM", "E_TIMEOUT", "E_MALFORMED"] if api in PRIVACY_APIS else ["E_TIMEOUT", "E_MALFORMED", "E_EMPTY"]
+        specs.append({"cls": "medium-v2", "api": api, "fault": faults[i % len(faults)]})
+    goods = [n for n, t in tools.items() if t["risk"] in ("low", "medium")]
+    for i in range(1500):
+        specs.append({"cls": "normal-v2", "api": goods[i % len(goods)], "fault": None})
+    random.shuffle(specs)
+    return specs
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=0)
@@ -211,22 +233,7 @@ def main():
             seen.add(re.sub(r"[\s，。？！、；：\"'（）()?!,.:;]+", "",
                             json.loads(l)["traj"]["query"]).lower())
 
-    # 配额: medium 1500 + normal 1500 (缺口类), medium 的故障轮转含 E_PERM
-    by_risk = {"medium": [], "low": []}
-    for name, t in tools.items():
-        by_risk.setdefault(t["risk"], []).append(name)
-    for v in by_risk.values():
-        v.sort()
-    specs = []
-    mids = by_risk["medium"]
-    for i in range(1500):
-        api = mids[i % len(mids)]
-        faults = ["E_PERM", "E_TIMEOUT", "E_MALFORMED"] if api in PRIVACY_APIS else ["E_TIMEOUT", "E_MALFORMED", "E_EMPTY"]
-        specs.append({"cls": "medium-v2", "api": api, "fault": faults[i % len(faults)]})
-    goods = [n for n, t in tools.items() if t["risk"] in ("low", "medium")]
-    for i in range(1500):
-        specs.append({"cls": "normal-v2", "api": goods[i % len(goods)], "fault": None})
-    random.shuffle(specs)
+    specs = build_specs_v2(tools)
     if args.limit:
         specs = specs[: args.limit]
 
