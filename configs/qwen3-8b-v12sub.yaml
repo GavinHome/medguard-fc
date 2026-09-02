@@ -1,0 +1,22 @@
+# 阶段4扩展: 8B × v12分层子集(4300轨迹/8757样本, 与4B-v12完全同数据) — 配方可泛化性终验
+# 对照: 8B基线(72.7/74.6/12.1) 与 4B-v12(68.8/85.8/6.0)
+# 预计 ~51h; 六层防护: clear-cache/自动续跑循环/1000步存档/caffeinate/日志留痕/24h崩溃3次退出
+model: /Users/yangxiaomin/ZCodeProject/medguard-fc/models/Qwen3-8B-4bit-base
+train: true
+data: data/processed/v12sub
+mask_prompt: true
+max_seq_length: 2560
+batch_size: 1
+iters: 8700
+learning_rate: 1.0e-4
+grad_checkpoint: true
+steps_per_report: 50
+steps_per_eval: 2900
+save_every: 1000
+clear_cache_threshold: 512
+adapter_path: models/qwen3-8b-v12
+lora_parameters:
+  rank: 32
+  alpha: 64
+  dropout: 0.0
+  scale: 10.0
