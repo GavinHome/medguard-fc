@@ -1,243 +1,211 @@
-=== 8B×v12 正式启动 ===
-=== 09-02 23:11 第 1/6 次尝试 ===
-Loading configuration file configs/qwen3-8b-v12sub.yaml
-Loading pretrained model
-Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Fetching 9 files:  11%|█         | 1/9 [00:02<00:16,  2.12s/it]Fetching 9 files:  22%|██▏       | 2/9 [00:02<00:06,  1.01it/s]Fetching 9 files:  33%|███▎      | 3/9 [00:02<00:04,  1.29it/s]Fetching 9 files:  44%|████▍     | 4/9 [00:03<00:02,  1.72it/s]Fetching 9 files:  56%|█████▌    | 5/9 [00:03<00:01,  2.30it/s]Fetching 9 files:  67%|██████▋   | 6/9 [00:03<00:01,  1.94it/s]Fetching 9 files:  78%|███████▊  | 7/9 [00:05<00:01,  1.36it/s]Fetching 9 files:  89%|████████▉ | 8/9 [00:11<00:02,  2.39s/it]=== 09-02 23:25 第 1/6 次尝试 ===
-Loading configuration file configs/qwen3-8b-v12sub.yaml
-Loading pretrained model
-Traceback (most recent call last):
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/bin/mlx_lm.lora", line 10, in <module>
-    sys.exit(main())
-             ~~~~^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/lora.py", line 369, in main
-    run(types.SimpleNamespace(**args))
-    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/lora.py", line 329, in run
-    model, tokenizer = load(args.model, tokenizer_config={"trust_remote_code": True})
-                       ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/utils.py", line 491, in load
-    model, config = load_model(model_path, lazy, model_config=model_config)
-                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/utils.py", line 319, in load_model
-    raise FileNotFoundError(f"No safetensors found in {model_path}")
-FileNotFoundError: No safetensors found in /Users/yangxiaomin/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192
-=== 09-02 23:25 异常退出(code=1), 24h内崩溃1次 ===
-=== 90 秒后自动续跑(从最新存档) ===
-=== 09-02 23:27 第 2/6 次尝试 ===
-Loading configuration file configs/qwen3-8b-v12sub.yaml
-Loading pretrained model
-Traceback (most recent call last):
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/bin/mlx_lm.lora", line 10, in <module>
-    sys.exit(main())
-             ~~~~^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/lora.py", line 369, in main
-    run(types.SimpleNamespace(**args))
-    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/lora.py", line 329, in run
-    model, tokenizer = load(args.model, tokenizer_config={"trust_remote_code": True})
-                       ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/utils.py", line 491, in load
-    model, config = load_model(model_path, lazy, model_config=model_config)
-                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/utils.py", line 319, in load_model
-    raise FileNotFoundError(f"No safetensors found in {model_path}")
-FileNotFoundError: No safetensors found in /Users/yangxiaomin/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192
-=== 09-02 23:27 异常退出(code=1), 24h内崩溃2次 ===
-=== 90 秒后自动续跑(从最新存档) ===
-=== 09-02 23:28 第 3/6 次尝试 ===
-Loading configuration file configs/qwen3-8b-v12sub.yaml
-Loading pretrained model
-Traceback (most recent call last):
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/bin/mlx_lm.lora", line 10, in <module>
-    sys.exit(main())
-             ~~~~^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/lora.py", line 369, in main
-    run(types.SimpleNamespace(**args))
-    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/lora.py", line 329, in run
-    model, tokenizer = load(args.model, tokenizer_config={"trust_remote_code": True})
-                       ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/utils.py", line 491, in load
-    model, config = load_model(model_path, lazy, model_config=model_config)
-                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/utils.py", line 319, in load_model
-    raise FileNotFoundError(f"No safetensors found in {model_path}")
-FileNotFoundError: No safetensors found in /Users/yangxiaomin/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192
-=== 09-02 23:28 异常退出(code=1), 24h内崩溃3次 ===
-=== 触发退出条件: 24小时内崩溃3次 — 停止本地训练, 转租卡方案 ===
-=== 09-03 底座重新下载完成,正式启动 ===
-=== 09-03 00:23 第 1/6 次尝试 ===
-Loading configuration file configs/qwen3-8b-v12sub.yaml
-Loading pretrained model
-Traceback (most recent call last):
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/bin/mlx_lm.lora", line 10, in <module>
-    sys.exit(main())
-             ~~~~^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/lora.py", line 369, in main
-    run(types.SimpleNamespace(**args))
-    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/lora.py", line 329, in run
-    model, tokenizer = load(args.model, tokenizer_config={"trust_remote_code": True})
-                       ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/utils.py", line 489, in load
-    model_path = _download(path_or_hf_repo, revision=revision)
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/utils.py", line 249, in _download
-    snapshot_download(
-    ~~~~~~~~~~~~~~~~~^
-        path_or_hf_repo,
-        ^^^^^^^^^^^^^^^^
-        revision=revision,
-        ^^^^^^^^^^^^^^^^^^
-        allow_patterns=allow_patterns,
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/huggingface_hub/utils/_validators.py", line 84, in _inner_fn
-    validate_repo_id(arg_value)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/huggingface_hub/utils/_validators.py", line 132, in validate_repo_id
-    raise HFValidationError(
-    ...<2 lines>...
-    )
-huggingface_hub.errors.HFValidationError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/Users/yangxiaomin/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192/'. Use `repo_type` argument if needed.
-=== 09-03 00:23 异常退出(code=1), 24h内崩溃1次 ===
-=== 90 秒后自动续跑(从最新存档) ===
-=== 09-03 00:25 第 2/6 次尝试 ===
-Loading configuration file configs/qwen3-8b-v12sub.yaml
-Loading pretrained model
-Traceback (most recent call last):
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/bin/mlx_lm.lora", line 10, in <module>
-    sys.exit(main())
-             ~~~~^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/lora.py", line 369, in main
-    run(types.SimpleNamespace(**args))
-    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/lora.py", line 329, in run
-    model, tokenizer = load(args.model, tokenizer_config={"trust_remote_code": True})
-                       ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/utils.py", line 489, in load
-    model_path = _download(path_or_hf_repo, revision=revision)
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/utils.py", line 249, in _download
-    snapshot_download(
-    ~~~~~~~~~~~~~~~~~^
-        path_or_hf_repo,
-        ^^^^^^^^^^^^^^^^
-        revision=revision,
-        ^^^^^^^^^^^^^^^^^^
-        allow_patterns=allow_patterns,
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/huggingface_hub/utils/_validators.py", line 84, in _inner_fn
-    validate_repo_id(arg_value)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/huggingface_hub/utils/_validators.py", line 132, in validate_repo_id
-    raise HFValidationError(
-    ...<2 lines>...
-    )
-huggingface_hub.errors.HFValidationError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/Users/yangxiaomin/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192/'. Use `repo_type` argument if needed.
-=== 09-03 00:25 异常退出(code=1), 24h内崩溃2次 ===
-=== 90 秒后自动续跑(从最新存档) ===
-=== 09-03 00:26 第 3/6 次尝试 ===
-Loading configuration file configs/qwen3-8b-v12sub.yaml
-Loading pretrained model
-Traceback (most recent call last):
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/bin/mlx_lm.lora", line 10, in <module>
-    sys.exit(main())
-             ~~~~^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/lora.py", line 369, in main
-    run(types.SimpleNamespace(**args))
-    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/lora.py", line 329, in run
-    model, tokenizer = load(args.model, tokenizer_config={"trust_remote_code": True})
-                       ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/utils.py", line 489, in load
-    model_path = _download(path_or_hf_repo, revision=revision)
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/utils.py", line 249, in _download
-    snapshot_download(
-    ~~~~~~~~~~~~~~~~~^
-        path_or_hf_repo,
-        ^^^^^^^^^^^^^^^^
-        revision=revision,
-        ^^^^^^^^^^^^^^^^^^
-        allow_patterns=allow_patterns,
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/huggingface_hub/utils/_validators.py", line 84, in _inner_fn
-    validate_repo_id(arg_value)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^
-  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/huggingface_hub/utils/_validators.py", line 132, in validate_repo_id
-    raise HFValidationError(
-    ...<2 lines>...
-    )
-huggingface_hub.errors.HFValidationError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/Users/yangxiaomin/.cache/huggingface/hub/models--mlx-community--Qwen3-8B-4bit/snapshots/545dc4251c05440727734bcd94334791f6ab0192/'. Use `repo_type` argument if needed.
-=== 09-03 00:26 异常退出(code=1), 24h内崩溃3次 ===
-=== 触发退出条件: 24小时内崩溃3次 — 停止本地训练, 转租卡方案 ===
-=== 09-03 00:34 第 1/6 次尝试 ===
+=== 09-03 01:00 第 1/6 次尝试 ===
 Loading configuration file configs/qwen3-8b-v12sub.yaml
 Loading pretrained model
 Loading datasets
 Training
 Trainable parameters: 0.474% (38.797M/8190.735M)
 Starting training..., iters: 8700
-Calculating loss...:   0%|          | 0/25 [00:00<?, ?it/s]Calculating loss...:   4%|▍         | 1/25 [00:00<00:05,  4.51it/s]Calculating loss...:   8%|▊         | 2/25 [00:00<00:04,  5.05it/s]Calculating loss...:  12%|█▏        | 3/25 [00:00<00:04,  5.22it/s]Calculating loss...:  16%|█▌        | 4/25 [00:00<00:03,  5.35it/s]Calculating loss...:  20%|██        | 5/25 [00:00<00:03,  5.40it/s]Calculating loss...:  24%|██▍       | 6/25 [00:01<00:03,  5.41it/s]Calculating loss...:  28%|██▊       | 7/25 [00:01<00:03,  5.44it/s]Calculating loss...:  32%|███▏      | 8/25 [00:01<00:03,  5.44it/s]Calculating loss...:  36%|███▌      | 9/25 [00:01<00:02,  5.44it/s]Calculating loss...:  40%|████      | 10/25 [00:01<00:02,  5.44it/s]Calculating loss...:  44%|████▍     | 11/25 [00:02<00:02,  5.44it/s]Calculating loss...:  48%|████▊     | 12/25 [00:02<00:02,  5.45it/s]Calculating loss...:  52%|█████▏    | 13/25 [00:02<00:02,  5.46it/s]Calculating loss...:  56%|█████▌    | 14/25 [00:02<00:02,  5.45it/s]Calculating loss...:  60%|██████    | 15/25 [00:02<00:01,  5.46it/s]Calculating loss...:  64%|██████▍   | 16/25 [00:02<00:01,  5.46it/s]Calculating loss...:  68%|██████▊   | 17/25 [00:03<00:01,  5.45it/s]Calculating loss...:  72%|███████▏  | 18/25 [00:03<00:01,  5.46it/s]Calculating loss...:  76%|███████▌  | 19/25 [00:03<00:01,  5.46it/s]Calculating loss...:  80%|████████  | 20/25 [00:03<00:00,  5.45it/s]Calculating loss...:  84%|████████▍ | 21/25 [00:03<00:00,  5.47it/s]Calculating loss...:  88%|████████▊ | 22/25 [00:04<00:00,  5.48it/s]Calculating loss...:  92%|█████████▏| 23/25 [00:04<00:00,  5.47it/s]Calculating loss...:  96%|█████████▌| 24/25 [00:04<00:00,  5.48it/s]Calculating loss...: 100%|██████████| 25/25 [00:04<00:00,  5.47it/s]Calculating loss...: 100%|██████████| 25/25 [00:04<00:00,  5.42it/s]
-Iter 1: Val loss 5.906, Val took 4.626s
-Iter 50: Train loss 0.122, Learning Rate 1.000e-04, It/sec 2.892, Tokens/sec 2.892, Trained Tokens 50, Peak mem 5.393 GB
-Iter 100: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.912, Tokens/sec 2.912, Trained Tokens 100, Peak mem 5.393 GB
-Iter 150: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.911, Tokens/sec 2.911, Trained Tokens 150, Peak mem 5.393 GB
-Iter 200: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.912, Tokens/sec 2.912, Trained Tokens 200, Peak mem 5.393 GB
-Iter 250: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.916, Tokens/sec 2.916, Trained Tokens 250, Peak mem 5.393 GB
-Iter 300: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.917, Tokens/sec 2.917, Trained Tokens 300, Peak mem 5.393 GB
-Iter 350: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.919, Tokens/sec 2.919, Trained Tokens 350, Peak mem 5.393 GB
-Iter 400: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.921, Tokens/sec 2.921, Trained Tokens 400, Peak mem 5.393 GB
-Iter 450: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.913, Tokens/sec 2.913, Trained Tokens 450, Peak mem 5.393 GB
-Iter 500: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.917, Tokens/sec 2.917, Trained Tokens 500, Peak mem 5.393 GB
-Iter 550: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.916, Tokens/sec 2.916, Trained Tokens 550, Peak mem 5.393 GB
-Iter 600: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.909, Tokens/sec 2.909, Trained Tokens 600, Peak mem 5.393 GB
-Iter 650: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.916, Tokens/sec 2.916, Trained Tokens 650, Peak mem 5.393 GB
-Iter 700: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.911, Tokens/sec 2.911, Trained Tokens 700, Peak mem 5.393 GB
-Iter 750: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.918, Tokens/sec 2.918, Trained Tokens 750, Peak mem 5.393 GB
-Iter 800: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.917, Tokens/sec 2.917, Trained Tokens 800, Peak mem 5.393 GB
-Iter 850: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.913, Tokens/sec 2.913, Trained Tokens 850, Peak mem 5.393 GB
-Iter 900: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.917, Tokens/sec 2.917, Trained Tokens 900, Peak mem 5.393 GB
-Iter 950: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.914, Tokens/sec 2.914, Trained Tokens 950, Peak mem 5.393 GB
-Iter 1000: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.919, Tokens/sec 2.919, Trained Tokens 1000, Peak mem 5.393 GB
+Calculating loss...:   0%|          | 0/25 [00:00<?, ?it/s]Calculating loss...:   4%|▍         | 1/25 [00:11<04:35, 11.48s/it]Calculating loss...:   8%|▊         | 2/25 [00:21<04:09, 10.85s/it]Calculating loss...:  12%|█▏        | 3/25 [00:32<03:54, 10.66s/it]Calculating loss...:  16%|█▌        | 4/25 [00:42<03:41, 10.56s/it]Calculating loss...:  20%|██        | 5/25 [00:53<03:31, 10.57s/it]Calculating loss...:  24%|██▍       | 6/25 [01:04<03:27, 10.93s/it]Calculating loss...:  28%|██▊       | 7/25 [01:15<03:15, 10.88s/it]Calculating loss...:  32%|███▏      | 8/25 [01:27<03:08, 11.12s/it]Calculating loss...:  36%|███▌      | 9/25 [01:37<02:54, 10.90s/it]Calculating loss...:  40%|████      | 10/25 [01:48<02:42, 10.80s/it]Calculating loss...:  44%|████▍     | 11/25 [01:59<02:34, 11.00s/it]Calculating loss...:  48%|████▊     | 12/25 [02:10<02:20, 10.83s/it]Calculating loss...:  52%|█████▏    | 13/25 [02:20<02:09, 10.75s/it]Calculating loss...:  56%|█████▌    | 14/25 [02:31<01:57, 10.66s/it]Calculating loss...:  60%|██████    | 15/25 [02:41<01:45, 10.59s/it]Calculating loss...:  64%|██████▍   | 16/25 [02:52<01:35, 10.64s/it]Calculating loss...:  68%|██████▊   | 17/25 [03:03<01:26, 10.83s/it]Calculating loss...:  72%|███████▏  | 18/25 [03:14<01:14, 10.71s/it]Calculating loss...:  76%|███████▌  | 19/25 [03:24<01:03, 10.62s/it]Calculating loss...:  80%|████████  | 20/25 [03:35<00:53, 10.72s/it]Calculating loss...:  84%|████████▍ | 21/25 [03:45<00:42, 10.63s/it]Calculating loss...:  88%|████████▊ | 22/25 [03:56<00:31, 10.62s/it]Calculating loss...:  92%|█████████▏| 23/25 [04:07<00:21, 10.82s/it]Calculating loss...:  96%|█████████▌| 24/25 [04:19<00:11, 11.01s/it]Calculating loss...: 100%|██████████| 25/25 [04:30<00:00, 11.04s/it]Calculating loss...: 100%|██████████| 25/25 [04:30<00:00, 10.81s/it]
+Iter 1: Val loss 2.930, Val took 270.385s
+Iter 50: Train loss 2.404, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.704, Trained Tokens 2884, Peak mem 9.329 GB
+Iter 100: Train loss 1.171, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.489, Trained Tokens 5505, Peak mem 9.329 GB
+Iter 150: Train loss 1.008, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.765, Trained Tokens 8420, Peak mem 9.329 GB
+Iter 200: Train loss 1.164, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.735, Trained Tokens 11341, Peak mem 9.329 GB
+Iter 250: Train loss 1.060, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.601, Trained Tokens 14094, Peak mem 9.329 GB
+Iter 300: Train loss 0.958, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.724, Trained Tokens 16981, Peak mem 9.329 GB
+Iter 350: Train loss 1.274, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 3.175, Trained Tokens 20392, Peak mem 9.394 GB
+Iter 400: Train loss 1.053, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.804, Trained Tokens 23390, Peak mem 9.524 GB
+Iter 450: Train loss 0.911, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.737, Trained Tokens 26306, Peak mem 9.524 GB
+Iter 500: Train loss 0.828, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.603, Trained Tokens 29049, Peak mem 9.524 GB
+Iter 550: Train loss 0.998, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.686, Trained Tokens 31901, Peak mem 9.524 GB
+Iter 600: Train loss 1.045, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.711, Trained Tokens 34797, Peak mem 9.524 GB
+Iter 650: Train loss 1.006, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.478, Trained Tokens 37418, Peak mem 9.524 GB
+Iter 700: Train loss 0.853, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.870, Trained Tokens 40446, Peak mem 9.524 GB
+Iter 750: Train loss 0.936, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.600, Trained Tokens 43204, Peak mem 9.524 GB
+Iter 800: Train loss 0.891, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.845, Trained Tokens 46242, Peak mem 9.524 GB
+Iter 850: Train loss 0.899, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.954, Trained Tokens 49393, Peak mem 9.524 GB
+Iter 900: Train loss 0.799, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.711, Trained Tokens 52265, Peak mem 9.524 GB
+Iter 950: Train loss 0.981, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.983, Trained Tokens 55457, Peak mem 9.524 GB
+Iter 1000: Train loss 0.754, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.536, Trained Tokens 58170, Peak mem 9.524 GB
 Iter 1000: Saved adapter weights to models/qwen3-8b-v12/adapters.safetensors and models/qwen3-8b-v12/0001000_adapters.safetensors.
-Iter 1050: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.913, Tokens/sec 2.913, Trained Tokens 1050, Peak mem 5.548 GB
-Iter 1100: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.918, Tokens/sec 2.918, Trained Tokens 1100, Peak mem 5.548 GB
-Iter 1150: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.917, Tokens/sec 2.917, Trained Tokens 1150, Peak mem 5.548 GB
-Iter 1200: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.916, Tokens/sec 2.916, Trained Tokens 1200, Peak mem 5.548 GB
-Iter 1250: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.921, Tokens/sec 2.921, Trained Tokens 1250, Peak mem 5.548 GB
-Iter 1300: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.918, Tokens/sec 2.918, Trained Tokens 1300, Peak mem 5.548 GB
-Iter 1350: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.916, Tokens/sec 2.916, Trained Tokens 1350, Peak mem 5.548 GB
-Iter 1400: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.919, Tokens/sec 2.919, Trained Tokens 1400, Peak mem 5.548 GB
-Iter 1450: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.914, Tokens/sec 2.914, Trained Tokens 1450, Peak mem 5.548 GB
-Iter 1500: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.917, Tokens/sec 2.917, Trained Tokens 1500, Peak mem 5.548 GB
-Iter 1550: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.918, Tokens/sec 2.918, Trained Tokens 1550, Peak mem 5.548 GB
-Iter 1600: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.915, Tokens/sec 2.915, Trained Tokens 1600, Peak mem 5.548 GB
-Iter 1650: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.910, Tokens/sec 2.910, Trained Tokens 1650, Peak mem 5.548 GB
-Iter 1700: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.910, Tokens/sec 2.910, Trained Tokens 1700, Peak mem 5.548 GB
-Iter 1750: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.917, Tokens/sec 2.917, Trained Tokens 1750, Peak mem 5.548 GB
-Iter 1800: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.917, Tokens/sec 2.917, Trained Tokens 1800, Peak mem 5.548 GB
-Iter 1850: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.913, Tokens/sec 2.913, Trained Tokens 1850, Peak mem 5.548 GB
-Iter 1900: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.919, Tokens/sec 2.919, Trained Tokens 1900, Peak mem 5.548 GB
-Iter 1950: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.915, Tokens/sec 2.915, Trained Tokens 1950, Peak mem 5.548 GB
-Iter 2000: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.919, Tokens/sec 2.919, Trained Tokens 2000, Peak mem 5.548 GB
+Iter 1050: Train loss 0.758, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.655, Trained Tokens 61015, Peak mem 9.524 GB
+Iter 1100: Train loss 0.918, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.588, Trained Tokens 63746, Peak mem 9.524 GB
+Iter 1150: Train loss 0.818, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.644, Trained Tokens 66539, Peak mem 9.524 GB
+Iter 1200: Train loss 0.861, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.646, Trained Tokens 69353, Peak mem 9.524 GB
+Iter 1250: Train loss 0.614, Learning Rate 1.000e-04, It/sec 0.048, Tokens/sec 2.474, Trained Tokens 71941, Peak mem 9.524 GB
+Iter 1300: Train loss 0.711, Learning Rate 1.000e-04, It/sec 0.048, Tokens/sec 2.491, Trained Tokens 74563, Peak mem 9.524 GB
+Iter 1350: Train loss 0.928, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.949, Trained Tokens 77688, Peak mem 9.524 GB
+Iter 1400: Train loss 0.786, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.834, Trained Tokens 80687, Peak mem 9.524 GB
+Iter 1450: Train loss 1.006, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 3.052, Trained Tokens 83957, Peak mem 9.549 GB
+Iter 1500: Train loss 0.864, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.758, Trained Tokens 86891, Peak mem 9.549 GB
+Iter 1550: Train loss 0.809, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.908, Trained Tokens 89991, Peak mem 9.549 GB
+Iter 1600: Train loss 0.768, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.877, Trained Tokens 93040, Peak mem 9.549 GB
+Iter 1650: Train loss 0.859, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.625, Trained Tokens 95819, Peak mem 9.549 GB
+Iter 1700: Train loss 0.861, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.832, Trained Tokens 98830, Peak mem 9.614 GB
+Iter 1750: Train loss 0.688, Learning Rate 1.000e-04, It/sec 0.048, Tokens/sec 2.628, Trained Tokens 101596, Peak mem 9.614 GB
+Iter 1800: Train loss 0.767, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.725, Trained Tokens 104489, Peak mem 9.614 GB
+Iter 1850: Train loss 0.842, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.560, Trained Tokens 107201, Peak mem 9.614 GB
+Iter 1900: Train loss 0.754, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.656, Trained Tokens 110009, Peak mem 9.614 GB
+Iter 1950: Train loss 0.790, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.475, Trained Tokens 112637, Peak mem 9.614 GB
+Iter 2000: Train loss 0.714, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.657, Trained Tokens 115455, Peak mem 9.614 GB
 Iter 2000: Saved adapter weights to models/qwen3-8b-v12/adapters.safetensors and models/qwen3-8b-v12/0002000_adapters.safetensors.
-Iter 2050: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.915, Tokens/sec 2.915, Trained Tokens 2050, Peak mem 5.548 GB
-Iter 2100: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.921, Tokens/sec 2.921, Trained Tokens 2100, Peak mem 5.548 GB
-Iter 2150: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.919, Tokens/sec 2.919, Trained Tokens 2150, Peak mem 5.548 GB
-Iter 2200: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.925, Tokens/sec 2.925, Trained Tokens 2200, Peak mem 5.548 GB
-Iter 2250: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.913, Tokens/sec 2.913, Trained Tokens 2250, Peak mem 5.548 GB
-Iter 2300: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.913, Tokens/sec 2.913, Trained Tokens 2300, Peak mem 5.548 GB
-Iter 2350: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.931, Tokens/sec 2.931, Trained Tokens 2350, Peak mem 5.548 GB
-Iter 2400: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.912, Tokens/sec 2.912, Trained Tokens 2400, Peak mem 5.548 GB
-Iter 2450: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.921, Tokens/sec 2.921, Trained Tokens 2450, Peak mem 5.548 GB
-Iter 2500: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.913, Tokens/sec 2.913, Trained Tokens 2500, Peak mem 5.548 GB
-Iter 2550: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.918, Tokens/sec 2.918, Trained Tokens 2550, Peak mem 5.548 GB
-Iter 2600: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.913, Tokens/sec 2.913, Trained Tokens 2600, Peak mem 5.548 GB
-Iter 2650: Train loss 0.000, Learning Rate 1.000e-04, It/sec 2.920, Tokens/sec 2.920, Trained Tokens 2650, Peak mem 5.548 GB
-/Users/yangxiaomin/.local/share/uv/python/cpython-3.13.9-macos-aarch64-none/lib/python3.13/multiprocessing/resource_tracker.py:324: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/mp-azvgrode'}
+Iter 2050: Train loss 0.823, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.666, Trained Tokens 118276, Peak mem 9.614 GB
+Iter 2100: Train loss 0.842, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.700, Trained Tokens 121133, Peak mem 9.614 GB
+Iter 2150: Train loss 0.950, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 3.048, Trained Tokens 124371, Peak mem 9.614 GB
+Iter 2200: Train loss 0.576, Learning Rate 1.000e-04, It/sec 0.048, Tokens/sec 2.463, Trained Tokens 126955, Peak mem 9.614 GB
+Iter 2250: Train loss 0.747, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.764, Trained Tokens 129875, Peak mem 9.614 GB
+Iter 2300: Train loss 0.785, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.759, Trained Tokens 132810, Peak mem 9.614 GB
+Iter 2350: Train loss 0.808, Learning Rate 1.000e-04, It/sec 0.048, Tokens/sec 2.450, Trained Tokens 135387, Peak mem 9.614 GB
+Iter 2400: Train loss 0.832, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.867, Trained Tokens 138431, Peak mem 9.614 GB
+Iter 2450: Train loss 0.816, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.734, Trained Tokens 141350, Peak mem 9.614 GB
+Iter 2500: Train loss 0.985, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.862, Trained Tokens 144384, Peak mem 9.614 GB
+Iter 2550: Train loss 0.786, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.745, Trained Tokens 147296, Peak mem 9.614 GB
+Iter 2600: Train loss 0.780, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.813, Trained Tokens 150276, Peak mem 9.614 GB
+Iter 2650: Train loss 0.818, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.386, Trained Tokens 152796, Peak mem 9.614 GB
+Iter 2700: Train loss 0.704, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.518, Trained Tokens 155449, Peak mem 9.614 GB
+Iter 2750: Train loss 0.835, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.471, Trained Tokens 158052, Peak mem 9.614 GB
+Iter 2800: Train loss 0.675, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 3.049, Trained Tokens 161287, Peak mem 9.614 GB
+Iter 2850: Train loss 0.742, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.515, Trained Tokens 163948, Peak mem 9.614 GB
+Calculating loss...:   0%|          | 0/25 [00:00<?, ?it/s]Calculating loss...:   4%|▍         | 1/25 [00:10<04:14, 10.60s/it]Calculating loss...:   8%|▊         | 2/25 [00:21<04:03, 10.60s/it]Calculating loss...:  12%|█▏        | 3/25 [00:31<03:51, 10.52s/it]Calculating loss...:  16%|█▌        | 4/25 [00:42<03:44, 10.70s/it]Calculating loss...:  20%|██        | 5/25 [00:54<03:40, 11.03s/it]Calculating loss...:  24%|██▍       | 6/25 [01:04<03:25, 10.82s/it]Calculating loss...:  28%|██▊       | 7/25 [01:15<03:16, 10.92s/it]Calculating loss...:  32%|███▏      | 8/25 [01:26<03:02, 10.76s/it]Calculating loss...:  36%|███▌      | 9/25 [01:36<02:52, 10.76s/it]Calculating loss...:  40%|████      | 10/25 [01:47<02:39, 10.66s/it]Calculating loss...:  44%|████▍     | 11/25 [01:57<02:28, 10.58s/it]Calculating loss...:  48%|████▊     | 12/25 [02:08<02:16, 10.53s/it]Calculating loss...:  52%|█████▏    | 13/25 [02:18<02:05, 10.50s/it]Calculating loss...:  56%|█████▌    | 14/25 [02:30<01:58, 10.79s/it]Calculating loss...:  60%|██████    | 15/25 [02:41<01:49, 10.99s/it]Calculating loss...:  64%|██████▍   | 16/25 [02:52<01:38, 10.92s/it]Calculating loss...:  68%|██████▊   | 17/25 [03:02<01:26, 10.82s/it]Calculating loss...:  72%|███████▏  | 18/25 [03:13<01:14, 10.70s/it]Calculating loss...:  76%|███████▌  | 19/25 [03:23<01:04, 10.67s/it]Calculating loss...:  80%|████████  | 20/25 [03:35<00:54, 10.90s/it]Calculating loss...:  84%|████████▍ | 21/25 [03:45<00:43, 10.76s/it]Calculating loss...:  88%|████████▊ | 22/25 [03:57<00:32, 10.92s/it]Calculating loss...:  92%|█████████▏| 23/25 [04:08<00:22, 11.13s/it]Calculating loss...:  96%|█████████▌| 24/25 [04:19<00:10, 10.92s/it]Calculating loss...: 100%|██████████| 25/25 [04:30<00:00, 11.03s/it]Calculating loss...: 100%|██████████| 25/25 [04:30<00:00, 10.82s/it]
+Iter 2900: Val loss 0.962, Val took 270.370s
+Iter 2900: Train loss 1.023, Learning Rate 1.000e-04, It/sec 0.046, Tokens/sec 2.700, Trained Tokens 166852, Peak mem 9.614 GB
+Iter 2950: Train loss 0.742, Learning Rate 1.000e-04, It/sec 0.048, Tokens/sec 2.609, Trained Tokens 169596, Peak mem 9.614 GB
+Iter 3000: Train loss 0.921, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.966, Trained Tokens 172751, Peak mem 9.614 GB
+Iter 3000: Saved adapter weights to models/qwen3-8b-v12/adapters.safetensors and models/qwen3-8b-v12/0003000_adapters.safetensors.
+Iter 3050: Train loss 0.825, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.889, Trained Tokens 175822, Peak mem 9.614 GB
+Iter 3100: Train loss 0.805, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.682, Trained Tokens 178699, Peak mem 9.614 GB
+Iter 3150: Train loss 0.761, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.625, Trained Tokens 181508, Peak mem 9.614 GB
+Traceback (most recent call last):
+  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/bin/mlx_lm.lora", line 10, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/lora.py", line 369, in main
+    run(types.SimpleNamespace(**args))
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/lora.py", line 341, in run
+    train_model(args, model, train_set, valid_set, training_callback)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/lora.py", line 295, in train_model
+    train(
+    ~~~~~^
+        model=model,
+        ^^^^^^^^^^^^
+    ...<4 lines>...
+        training_callback=training_callback,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/tuner/trainer.py", line 328, in train
+    mx.eval(state, losses, n_tokens, grad_accum)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: [METAL] Command buffer execution failed: Impacting Interactivity (0000000e:kIOGPUCommandBufferCallbackErrorImpactingInteractivity).
+=== 09-03 19:46 异常退出(code=1), 24h内崩溃1次 ===
+=== 90 秒后自动续跑(从最新存档) ===
+=== 09-03 19:48 第 2/6 次尝试 ===
+Loading configuration file configs/qwen3-8b-v12sub.yaml
+Loading pretrained model
+Loading datasets
+Training
+Trainable parameters: 0.474% (38.797M/8190.735M)
+Starting training..., iters: 8700
+Calculating loss...:   0%|          | 0/25 [00:00<?, ?it/s]Calculating loss...:   4%|▍         | 1/25 [00:11<04:36, 11.51s/it]Calculating loss...:   8%|▊         | 2/25 [00:22<04:11, 10.95s/it]Calculating loss...:  12%|█▏        | 3/25 [00:32<03:56, 10.76s/it]Calculating loss...:  16%|█▌        | 4/25 [00:43<03:44, 10.67s/it]Calculating loss...:  20%|██        | 5/25 [00:53<03:33, 10.70s/it]Calculating loss...:  24%|██▍       | 6/25 [01:05<03:29, 11.04s/it]Calculating loss...:  28%|██▊       | 7/25 [01:16<03:17, 10.98s/it]Calculating loss...:  32%|███▏      | 8/25 [01:28<03:10, 11.19s/it]Calculating loss...:  36%|███▌      | 9/25 [01:38<02:55, 10.96s/it]Calculating loss...:  40%|████      | 10/25 [01:49<02:42, 10.86s/it]Calculating loss...:  44%|████▍     | 11/25 [02:00<02:35, 11.08s/it]Calculating loss...:  48%|████▊     | 12/25 [02:11<02:21, 10.92s/it]Calculating loss...:  52%|█████▏    | 13/25 [02:21<02:09, 10.82s/it]Calculating loss...:  56%|█████▌    | 14/25 [02:32<01:57, 10.71s/it]Calculating loss...:  60%|██████    | 15/25 [02:42<01:46, 10.65s/it]Calculating loss...:  64%|██████▍   | 16/25 [02:53<01:36, 10.69s/it]Calculating loss...:  68%|██████▊   | 17/25 [03:04<01:27, 10.88s/it]Calculating loss...:  72%|███████▏  | 18/25 [03:15<01:15, 10.75s/it]Calculating loss...:  76%|███████▌  | 19/25 [03:25<01:04, 10.68s/it]Calculating loss...:  80%|████████  | 20/25 [03:37<00:54, 10.81s/it]Calculating loss...:  84%|████████▍ | 21/25 [03:47<00:43, 10.75s/it]Calculating loss...:  88%|████████▊ | 22/25 [03:58<00:32, 10.79s/it]Calculating loss...:  92%|█████████▏| 23/25 [04:09<00:21, 10.94s/it]Calculating loss...:  96%|█████████▌| 24/25 [04:21<00:11, 11.11s/it]Calculating loss...: 100%|██████████| 25/25 [04:32<00:00, 11.14s/it]Calculating loss...: 100%|██████████| 25/25 [04:32<00:00, 10.90s/it]
+Iter 1: Val loss 2.930, Val took 272.558s
+Iter 50: Train loss 2.404, Learning Rate 1.000e-04, It/sec 0.046, Tokens/sec 2.673, Trained Tokens 2884, Peak mem 9.329 GB
+Iter 100: Train loss 1.171, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.466, Trained Tokens 5505, Peak mem 9.329 GB
+Iter 150: Train loss 1.008, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.742, Trained Tokens 8420, Peak mem 9.329 GB
+Iter 200: Train loss 1.164, Learning Rate 1.000e-04, It/sec 0.045, Tokens/sec 2.619, Trained Tokens 11341, Peak mem 9.329 GB
+Iter 250: Train loss 1.060, Learning Rate 1.000e-04, It/sec 0.046, Tokens/sec 2.539, Trained Tokens 14094, Peak mem 9.329 GB
+Iter 300: Train loss 0.958, Learning Rate 1.000e-04, It/sec 0.045, Tokens/sec 2.625, Trained Tokens 16981, Peak mem 9.329 GB
+Iter 350: Train loss 1.274, Learning Rate 1.000e-04, It/sec 0.046, Tokens/sec 3.157, Trained Tokens 20392, Peak mem 9.394 GB
+Iter 400: Train loss 1.053, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.796, Trained Tokens 23390, Peak mem 9.524 GB
+Iter 450: Train loss 0.911, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.734, Trained Tokens 26306, Peak mem 9.524 GB
+Iter 500: Train loss 0.828, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.601, Trained Tokens 29049, Peak mem 9.524 GB
+Iter 550: Train loss 0.998, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.684, Trained Tokens 31901, Peak mem 9.524 GB
+Iter 600: Train loss 1.045, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.709, Trained Tokens 34797, Peak mem 9.524 GB
+Iter 650: Train loss 1.006, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.476, Trained Tokens 37418, Peak mem 9.524 GB
+Iter 700: Train loss 0.853, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.868, Trained Tokens 40446, Peak mem 9.524 GB
+Iter 750: Train loss 0.936, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.598, Trained Tokens 43204, Peak mem 9.524 GB
+Iter 800: Train loss 0.891, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.843, Trained Tokens 46242, Peak mem 9.524 GB
+Iter 850: Train loss 0.899, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.953, Trained Tokens 49393, Peak mem 9.524 GB
+Iter 900: Train loss 0.799, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.713, Trained Tokens 52265, Peak mem 9.524 GB
+Iter 950: Train loss 0.981, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.984, Trained Tokens 55457, Peak mem 9.524 GB
+Iter 1000: Train loss 0.754, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.573, Trained Tokens 58170, Peak mem 9.524 GB
+Iter 1000: Saved adapter weights to models/qwen3-8b-v12/adapters.safetensors and models/qwen3-8b-v12/0001000_adapters.safetensors.
+Iter 1050: Train loss 0.758, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.695, Trained Tokens 61015, Peak mem 9.524 GB
+Iter 1100: Train loss 0.918, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.587, Trained Tokens 63746, Peak mem 9.524 GB
+Iter 1150: Train loss 0.818, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.644, Trained Tokens 66539, Peak mem 9.524 GB
+Iter 1200: Train loss 0.861, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.646, Trained Tokens 69353, Peak mem 9.524 GB
+Iter 1250: Train loss 0.614, Learning Rate 1.000e-04, It/sec 0.048, Tokens/sec 2.473, Trained Tokens 71941, Peak mem 9.524 GB
+Iter 1300: Train loss 0.711, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.490, Trained Tokens 74563, Peak mem 9.524 GB
+Iter 1350: Train loss 0.928, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.948, Trained Tokens 77688, Peak mem 9.524 GB
+Iter 1400: Train loss 0.786, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.831, Trained Tokens 80687, Peak mem 9.524 GB
+Iter 1450: Train loss 1.006, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 3.051, Trained Tokens 83957, Peak mem 9.549 GB
+Iter 1500: Train loss 0.864, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.756, Trained Tokens 86891, Peak mem 9.549 GB
+Iter 1550: Train loss 0.809, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.907, Trained Tokens 89991, Peak mem 9.549 GB
+Iter 1600: Train loss 0.768, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.876, Trained Tokens 93040, Peak mem 9.549 GB
+/Users/yangxiaomin/.local/share/uv/python/cpython-3.13.9-macos-aarch64-none/lib/python3.13/multiprocessing/resource_tracker.py:324: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/mp-rkm9ccp4'}
   warnings.warn(
+=== 09-04 05:37 异常退出(code=143), 24h内崩溃2次 ===
+=== 90 秒后自动续跑(从最新存档) ===
+=== 09-04 05:39 第 3/6 次尝试 ===
+Loading configuration file configs/qwen3-8b-v12sub.yaml
+Loading pretrained model
+Loading datasets
+Training
+Trainable parameters: 0.474% (38.797M/8190.735M)
+Starting training..., iters: 8700
+Calculating loss...:   0%|          | 0/25 [00:00<?, ?it/s]Calculating loss...:   4%|▍         | 1/25 [00:23<09:28, 23.70s/it]Calculating loss...:   8%|▊         | 2/25 [00:44<08:30, 22.20s/it]Calculating loss...:  12%|█▏        | 3/25 [01:06<07:59, 21.77s/it]Calculating loss...:  16%|█▌        | 4/25 [01:27<07:32, 21.57s/it]Calculating loss...:  20%|██        | 5/25 [01:49<07:12, 21.64s/it]Calculating loss...:  24%|██▍       | 6/25 [02:12<07:04, 22.36s/it]Calculating loss...:  28%|██▊       | 7/25 [02:34<06:39, 22.21s/it]Calculating loss...:  32%|███▏      | 8/25 [02:58<06:26, 22.71s/it]Calculating loss...:  36%|███▌      | 9/25 [03:19<05:55, 22.22s/it]Calculating loss...:  40%|████      | 10/25 [03:41<05:30, 22.03s/it]Calculating loss...:  44%|████▍     | 11/25 [04:04<05:13, 22.43s/it]Calculating loss...:  48%|████▊     | 12/25 [04:26<04:47, 22.10s/it]Calculating loss...:  52%|█████▏    | 13/25 [04:47<04:23, 21.95s/it]Calculating loss...:  56%|█████▌    | 14/25 [05:08<03:59, 21.77s/it]Calculating loss...:  60%|██████    | 15/25 [05:30<03:36, 21.62s/it]Calculating loss...:  64%|██████▍   | 16/25 [05:52<03:15, 21.71s/it]Calculating loss...:  68%|██████▊   | 17/25 [06:15<02:56, 22.11s/it]Calculating loss...:  72%|███████▏  | 18/25 [06:36<02:32, 21.84s/it]Calculating loss...:  76%|███████▌  | 19/25 [06:57<02:09, 21.52s/it]Calculating loss...:  80%|████████  | 20/25 [07:08<01:31, 18.35s/it]Calculating loss...:  84%|████████▍ | 21/25 [07:18<01:03, 15.97s/it]Calculating loss...:  88%|████████▊ | 22/25 [07:29<00:43, 14.36s/it]Calculating loss...:  92%|█████████▏| 23/25 [07:40<00:26, 13.44s/it]Calculating loss...:  96%|█████████▌| 24/25 [07:51<00:12, 12.85s/it]Calculating loss...: 100%|██████████| 25/25 [08:03<00:00, 12.33s/it]Calculating loss...: 100%|██████████| 25/25 [08:03<00:00, 19.32s/it]
+Iter 1: Val loss 2.930, Val took 483.014s
+Iter 50: Train loss 2.404, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.703, Trained Tokens 2884, Peak mem 9.329 GB
+Iter 100: Train loss 1.171, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.488, Trained Tokens 5505, Peak mem 9.329 GB
+Iter 150: Train loss 1.008, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.761, Trained Tokens 8420, Peak mem 9.329 GB
+Iter 200: Train loss 1.164, Learning Rate 1.000e-04, It/sec 0.046, Tokens/sec 2.716, Trained Tokens 11341, Peak mem 9.329 GB
+Iter 250: Train loss 1.060, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.595, Trained Tokens 14094, Peak mem 9.329 GB
+Iter 300: Train loss 0.958, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.721, Trained Tokens 16981, Peak mem 9.329 GB
+Iter 350: Train loss 1.274, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 3.173, Trained Tokens 20392, Peak mem 9.394 GB
+Iter 400: Train loss 1.053, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.801, Trained Tokens 23390, Peak mem 9.524 GB
+Iter 450: Train loss 0.911, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.733, Trained Tokens 26306, Peak mem 9.524 GB
+Iter 500: Train loss 0.828, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.599, Trained Tokens 29049, Peak mem 9.524 GB
+Iter 550: Train loss 0.998, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.682, Trained Tokens 31901, Peak mem 9.524 GB
+Iter 600: Train loss 1.045, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.705, Trained Tokens 34797, Peak mem 9.524 GB
+Iter 650: Train loss 1.006, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.474, Trained Tokens 37418, Peak mem 9.524 GB
+Iter 700: Train loss 0.853, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.866, Trained Tokens 40446, Peak mem 9.524 GB
+Iter 750: Train loss 0.936, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.595, Trained Tokens 43204, Peak mem 9.524 GB
+Iter 800: Train loss 0.891, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.842, Trained Tokens 46242, Peak mem 9.524 GB
+Iter 850: Train loss 0.899, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.954, Trained Tokens 49393, Peak mem 9.524 GB
+Iter 900: Train loss 0.799, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.713, Trained Tokens 52265, Peak mem 9.524 GB
+Iter 950: Train loss 0.981, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.983, Trained Tokens 55457, Peak mem 9.524 GB
+Iter 1000: Train loss 0.754, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.574, Trained Tokens 58170, Peak mem 9.524 GB
+Iter 1000: Saved adapter weights to models/qwen3-8b-v12/adapters.safetensors and models/qwen3-8b-v12/0001000_adapters.safetensors.
+Iter 1050: Train loss 0.758, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.695, Trained Tokens 61015, Peak mem 9.524 GB
+Iter 1100: Train loss 0.918, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.586, Trained Tokens 63746, Peak mem 9.524 GB
+Iter 1150: Train loss 0.818, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.644, Trained Tokens 66539, Peak mem 9.524 GB
+Iter 1200: Train loss 0.861, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.645, Trained Tokens 69353, Peak mem 9.524 GB
+Iter 1250: Train loss 0.614, Learning Rate 1.000e-04, It/sec 0.048, Tokens/sec 2.473, Trained Tokens 71941, Peak mem 9.524 GB
+Iter 1300: Train loss 0.711, Learning Rate 1.000e-04, It/sec 0.047, Tokens/sec 2.484, Trained Tokens 74563, Peak mem 9.524 GB
+Traceback (most recent call last):
+  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/bin/mlx_lm.lora", line 10, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/lora.py", line 369, in main
+    run(types.SimpleNamespace(**args))
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/lora.py", line 341, in run
+    train_model(args, model, train_set, valid_set, training_callback)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/lora.py", line 295, in train_model
+    train(
+    ~~~~~^
+        model=model,
+        ^^^^^^^^^^^^
+    ...<4 lines>...
+        training_callback=training_callback,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/yangxiaomin/ZCodeProject/medguard-fc/.venv/lib/python3.13/site-packages/mlx_lm/tuner/trainer.py", line 328, in train
+    mx.eval(state, losses, n_tokens, grad_accum)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: [METAL] Command buffer execution failed: Impacting Interactivity (0000000e:kIOGPUCommandBufferCallbackErrorImpactingInteractivity).
+=== 09-04 13:42 异常退出(code=1), 24h内崩溃3次 ===
+=== 触发退出条件: 24小时内崩溃3次 — 停止本地训练, 转租卡方案 ===
