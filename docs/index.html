@@ -2,32 +2,63 @@
 <html lang="zh">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MedGuard-FC 论文在线阅读</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <style>
-  body { margin:0; font-family:-apple-system,'PingFang SC',sans-serif; background:#f6f8fa; }
-  header { background:#0f172a; color:#fff; padding:14px 20px; display:flex; gap:18px; align-items:center; }
-  header a { color:#93c5fd; text-decoration:none; font-size:14px; }
+  body { margin:0; font-family:-apple-system,'PingFang SC',sans-serif; background:#525659; }
+  header { position:sticky; top:0; z-index:10; background:#0f172a; color:#fff; padding:12px 20px;
+           display:flex; gap:18px; align-items:center; box-shadow:0 1px 6px rgba(0,0,0,.4); }
+  header b { font-size:15px; }
+  header a { color:#93c5fd; text-decoration:none; font-size:14px; cursor:pointer; }
   header a.on { color:#fff; font-weight:600; border-bottom:2px solid #93c5fd; }
-  iframe { width:100%; height:calc(100vh - 54px); border:0; background:#525659; }
+  header .dl { margin-left:auto; color:#cbd5e1; font-size:13px; }
+  #viewer { height:calc(100vh - 50px); overflow-y:scroll; text-align:center; }
+  #viewer canvas { display:block; margin:10px auto; box-shadow:0 2px 10px rgba(0,0,0,.5); background:#fff; }
+  #status { color:#cbd5e1; padding:30px; font-size:14px; }
 </style>
 </head>
 <body>
 <header>
   <b>MedGuard-FC 论文</b>
-  <a class="on" id="t-en" href="?p=en" onclick="show('en');return false">English (9 pages)</a>
-  <a id="t-zh" href="?p=zh" onclick="show('zh');return false">中文版（8 页）</a>
-  <a href="https://github.com/GavinHome/medguard-fc" target="_blank">GitHub ↗</a>
+  <a class="on" id="t-en" onclick="load('en')">English (9 pages)</a>
+  <a id="t-zh" onclick="load('zh')">中文版（8 页）</a>
+  <a class="dl" id="dl" href="paper_en.pdf" download>下载 PDF ↓</a>
 </header>
-<iframe id="v-en" src="paper_en.pdf#view=FitH" title="English paper"></iframe>
-<iframe id="v-zh" src="paper_zh.pdf#view=FitH" title="中文论文" style="display:none"></iframe>
+<div id="viewer"><div id="status">加载中…</div></div>
 <script>
-function show(p){
-  document.getElementById('v-en').style.display = p==='en'?'block':'none';
-  document.getElementById('v-zh').style.display = p==='zh'?'block':'none';
-  document.getElementById('t-en').className = p==='en'?'on':'';
-  document.getElementById('t-zh').className = p==='zh'?'on':'';
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+const FILES = { en: 'paper_en.pdf', zh: 'paper_zh.pdf' };
+let current = null;
+
+async function load(lang) {
+  if (current === lang) return;
+  current = lang;
+  document.getElementById('t-en').className = lang === 'en' ? 'on' : '';
+  document.getElementById('t-zh').className = lang === 'zh' ? 'on' : '';
+  document.getElementById('dl').href = FILES[lang];
+  const viewer = document.getElementById('viewer');
+  viewer.innerHTML = '<div id="status">加载中…</div>';
+  try {
+    const pdf = await pdfjsLib.getDocument(FILES[lang]).promise;
+    viewer.innerHTML = '';
+    const width = Math.min(viewer.clientWidth - 28, 960);
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+      const vp = page.getViewport({ scale: width / page.getViewport({ scale: 1 }).width });
+      const cv = document.createElement('canvas');
+      cv.width = vp.width * 2; cv.height = vp.height * 2;   // 2x 超采样, 缩放显示保清晰
+      cv.style.width = vp.width + 'px'; cv.style.height = vp.height + 'px';
+      viewer.appendChild(cv);
+      await page.render({ canvasContext: cv.getContext('2d'), viewport: vp,
+                          transform: [2, 0, 0, 2, 0, 0] }).promise;
+    }
+  } catch (e) {
+    viewer.innerHTML = '<div id="status">加载失败: ' + e.message + ' — 请刷新重试</div>';
+  }
 }
-show(location.search.includes('p=zh')?'zh':'en');
+load('en');
 </script>
 </body>
 </html>
