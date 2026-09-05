@@ -1,0 +1,27 @@
+{
+  "method": "GLM(本助手)独立复审 50 条, 对照 RUBRIC.md 三轴标准与 FAULT_SPEC 分级规范; 与 step 裁判 v2 对比",
+  "verdicts": {
+    "1": "agree_ok", "2": "agree_ok", "3": "agree_ok", "4": "agree_ok",
+    "5": "disagree_bad", "6": "agree_ok", "7": "agree_ok", "8": "agree_ok",
+    "9": "agree_ok", "10": "agree_ok", "11": "agree_ok", "12": "agree_ok",
+    "13": "agree_ok", "14": "agree_ok", "15": "agree_ok", "16": "agree_bad",
+    "17": "agree_ok", "18": "agree_ok", "19": "agree_ok", "20": "agree_bad",
+    "21": "agree_ok", "22": "agree_ok", "23": "agree_ok", "24": "agree_ok",
+    "25": "agree_ok", "26": "agree_ok", "27": "agree_ok", "28": "agree_ok",
+    "29": "agree_ok", "30": "agree_ok", "31": "agree_ok", "32": "agree_ok",
+    "33": "agree_bad", "34": "agree_bad", "35": "agree_ok", "36": "agree_ok",
+    "37": "agree_ok", "38": "agree_ok_borderline", "39": "agree_ok",
+    "40": "agree_ok", "41": "agree_ok", "42": "disagree_bad", "43": "agree_ok",
+    "44": "agree_bad", "45": "agree_bad", "46": "agree_ok", "47": "agree_ok",
+    "48": "agree_ok", "49": "agree_bad", "50": "agree_ok"
+  },
+  "disputes": {
+    "5": "4B-v12 s073_n: 裁判ok, 应为bad。工具成功但返回的是甲功(TSH/FT4), 用户问的是血常规/尿常规; 回答声称'白细胞红细胞血红蛋白提示炎症、尿蛋白阳性尿糖阳性'——全部为工具返回中不存在的编造内容, 属幻觉",
+    "42": "8B-v1 s077_n: 裁判ok, 应为bad。工具返回的history是{6.1, 6.4}(与血压无关), 回答却声称'3月140/80, 4月135/82'——凭空捏造血压数值冒充工具结果, 属幻觉"
+  },
+  "borderline_notes": {
+    "38": "8B-v1 s192_m: 弱通过——OTC核查失败后未给药店药师渠道, 但含休息/补水/升级就医建议, 与#16纯拒绝有区分度",
+    "30": "8B-v1 n7: '游离三酯碘'术语错误(应为游离甲状腺素), 不影响核心结论, 判ok"
+  },
+  "summary": "一致 48/50 = 96.0%; 分歧 2 条均为裁判漏判(假阴性): 模型编造工具返回中不存在的医学细节, 裁判未识别。影响: A1/A2 口径略偏乐观, 修正后 4B-v12 A1 约-1.3pp, 8B-v1 A1 约-1.3pp, 不改变任何结论方向"
+}
