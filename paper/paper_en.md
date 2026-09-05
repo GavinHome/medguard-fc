@@ -1,7 +1,6 @@
 # MedGuard-FC: Benchmarking and Teaching Graded Failure Recovery for Tool-Calling Medical Agents
 
-**Authors**: (to be determined)¹
-¹ (affiliation to be determined)
+**Authors**: Simon Yang
 
 ---
 

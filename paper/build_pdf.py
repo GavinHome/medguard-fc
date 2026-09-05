@@ -181,10 +181,10 @@ def main():
         i += 1
 
     zh_meta = dict(title="面向中文医疗智能体工具调用的分级故障恢复：评测基准与错误驱动的数据合成",
-                   author="（待定）",
+                   author="Simon Yang",
                    subject="MedGuard-FC：中文医疗工具调用故障恢复评测与安全微调")
     en_meta = dict(title="MedGuard-FC: Benchmarking and Teaching Graded Failure Recovery for Tool-Calling Medical Agents",
-                   author="(to be determined)",
+                   author="Simon Yang",
                    subject="MedGuard-FC: benchmark and error-driven data synthesis for graded tool-failure recovery in medical agents")
     meta = en_meta if args.lang == "en" else zh_meta
     doc = BaseDocTemplate(str(out), pagesize=A4,
