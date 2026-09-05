@@ -7,35 +7,41 @@
 
 ## 📄 论文（初稿）· 作者 Simon Yang
 
-**PDF 原文件**：[paper_en.pdf](./paper/paper_en.pdf)（9 页） · [paper_zh.pdf](./paper/paper_zh.pdf)（8 页）
-
 《MedGuard-FC: Benchmarking and Teaching Graded Failure Recovery for Tool-Calling Medical Agents》
 —— 10 配置对照实验 + 错误驱动数据合成 + 评测基准。核心数字：4B-v12 微调
 A2 85.8% [81.0, 90.1]（置信区间与 8B 基线 [69.0, 80.6] 不相交），B 22.4%→6.0%。
 
-### English (inline preview)
-
-<img src="./paper/preview/paper_en_p1.png" width="720" alt="English paper page 1">
-<img src="./paper/preview/paper_en_p2.png" width="720" alt="English paper page 2">
-<img src="./paper/preview/paper_en_p3.png" width="720" alt="English paper page 3">
-<img src="./paper/preview/paper_en_p4.png" width="720" alt="English paper page 4">
-<img src="./paper/preview/paper_en_p5.png" width="720" alt="English paper page 5">
-<img src="./paper/preview/paper_en_p6.png" width="720" alt="English paper page 6">
-<img src="./paper/preview/paper_en_p7.png" width="720" alt="English paper page 7">
-<img src="./paper/preview/paper_en_p8.png" width="720" alt="English paper page 8">
-<img src="./paper/preview/paper_en_p9.png" width="720" alt="English paper page 9">
+| 阅读方式 | 入口 |
+|---|---|
+| 🖥 **在线滑动阅读**（PDF 窗口，中英切换） | 启用 GitHub Pages 后：[阅读页链接](https://gavinhome.github.io/medguard-fc/) |
+| 📑 GitHub 查看器 | [paper_en.pdf](./paper/paper_en.pdf) · [paper_zh.pdf](./paper/paper_zh.pdf) |
 
 <details>
-<summary><b>中文版（点击展开 8 页）</b></summary>
+<summary><b>📖 英文版逐页预览（点击展开，9 页）</b></summary>
 
-<img src="./paper/preview/paper_zh_p1.png" width="720" alt="中文论文 page 1">
-<img src="./paper/preview/paper_zh_p2.png" width="720" alt="中文论文 page 2">
-<img src="./paper/preview/paper_zh_p3.png" width="720" alt="中文论文 page 3">
-<img src="./paper/preview/paper_zh_p4.png" width="720" alt="中文论文 page 4">
-<img src="./paper/preview/paper_zh_p5.png" width="720" alt="中文论文 page 5">
-<img src="./paper/preview/paper_zh_p6.png" width="720" alt="中文论文 page 6">
-<img src="./paper/preview/paper_zh_p7.png" width="720" alt="中文论文 page 7">
-<img src="./paper/preview/paper_zh_p8.png" width="720" alt="中文论文 page 8">
+<img src="./paper/preview/paper_en_p1.png" width="600" alt="English p1">
+<img src="./paper/preview/paper_en_p2.png" width="600" alt="English p2">
+<img src="./paper/preview/paper_en_p3.png" width="600" alt="English p3">
+<img src="./paper/preview/paper_en_p4.png" width="600" alt="English p4">
+<img src="./paper/preview/paper_en_p5.png" width="600" alt="English p5">
+<img src="./paper/preview/paper_en_p6.png" width="600" alt="English p6">
+<img src="./paper/preview/paper_en_p7.png" width="600" alt="English p7">
+<img src="./paper/preview/paper_en_p8.png" width="600" alt="English p8">
+<img src="./paper/preview/paper_en_p9.png" width="600" alt="English p9">
+
+</details>
+
+<details>
+<summary><b>📖 中文版逐页预览（点击展开，8 页）</b></summary>
+
+<img src="./paper/preview/paper_zh_p1.png" width="600" alt="中文 p1">
+<img src="./paper/preview/paper_zh_p2.png" width="600" alt="中文 p2">
+<img src="./paper/preview/paper_zh_p3.png" width="600" alt="中文 p3">
+<img src="./paper/preview/paper_zh_p4.png" width="600" alt="中文 p4">
+<img src="./paper/preview/paper_zh_p5.png" width="600" alt="中文 p5">
+<img src="./paper/preview/paper_zh_p6.png" width="600" alt="中文 p6">
+<img src="./paper/preview/paper_zh_p7.png" width="600" alt="中文 p7">
+<img src="./paper/preview/paper_zh_p8.png" width="600" alt="中文 p8">
 
 </details>
 

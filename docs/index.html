@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>MedGuard-FC 论文在线阅读</title>
+<style>
+  body { margin:0; font-family:-apple-system,'PingFang SC',sans-serif; background:#f6f8fa; }
+  header { background:#0f172a; color:#fff; padding:14px 20px; display:flex; gap:18px; align-items:center; }
+  header a { color:#93c5fd; text-decoration:none; font-size:14px; }
+  header a.on { color:#fff; font-weight:600; border-bottom:2px solid #93c5fd; }
+  iframe { width:100%; height:calc(100vh - 54px); border:0; background:#525659; }
+</style>
+</head>
+<body>
+<header>
+  <b>MedGuard-FC 论文</b>
+  <a class="on" id="t-en" href="?p=en" onclick="show('en');return false">English (9 pages)</a>
+  <a id="t-zh" href="?p=zh" onclick="show('zh');return false">中文版（8 页）</a>
+  <a href="https://github.com/GavinHome/medguard-fc" target="_blank">GitHub ↗</a>
+</header>
+<iframe id="v-en" src="paper_en.pdf#view=FitH" title="English paper"></iframe>
+<iframe id="v-zh" src="paper_zh.pdf#view=FitH" title="中文论文" style="display:none"></iframe>
+<script>
+function show(p){
+  document.getElementById('v-en').style.display = p==='en'?'block':'none';
+  document.getElementById('v-zh').style.display = p==='zh'?'block':'none';
+  document.getElementById('t-en').className = p==='en'?'on':'';
+  document.getElementById('t-zh').className = p==='zh'?'on':'';
+}
+show(location.search.includes('p=zh')?'zh':'en');
+</script>
+</body>
+</html>
