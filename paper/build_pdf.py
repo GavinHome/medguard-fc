@@ -1,7 +1,11 @@
-"""paper_zh.md → paper_zh.pdf（学术排版：宋体正文/粗体标题/booktabs 式表格）。
+"""paper_zh.md / paper_en.md → 学术排版 PDF。
 
-用法: uv run python paper/build_pdf.py
+中文: 宋体正文/粗体标题; 英文: Times 正文, 非 Latin-1 字符(τ→①≈α≥⁹)回退宋体。
+用法:
+  /path/to/anaconda3/python3 paper/build_pdf.py                    # 中文 paper_zh.pdf
+  ... paper/build_pdf.py --lang en                                 # 英文 paper_en.pdf
 """
+import argparse
 import re
 from pathlib import Path
 
@@ -17,47 +21,76 @@ from reportlab.platypus import (BaseDocTemplate, CondPageBreak, Frame,
                                 Table, TableStyle)
 
 ROOT = Path(__file__).resolve().parents[1]
-MD = ROOT / "paper" / "paper_zh.md"
-OUT = ROOT / "paper" / "paper_zh.pdf"
-
-pdfmetrics.registerFont(TTFont("Songti", "/System/Library/Fonts/Supplemental/Songti.ttc", subfontIndex=0))
-pdfmetrics.registerFont(TTFont("SongtiB", "/System/Library/Fonts/Supplemental/Songti.ttc", subfontIndex=1))
-registerFontFamily("Songti", normal="Songti", bold="SongtiB", italic="Songti", boldItalic="SongtiB")
-
 PAGE_W, PAGE_H = A4
 MARGIN = 62
 AVAIL = PAGE_W - 2 * MARGIN
 
-S = {
-    "title":  ParagraphStyle("title", fontName="SongtiB", fontSize=17, leading=25, alignment=TA_CENTER, spaceAfter=6),
-    "author": ParagraphStyle("author", fontName="Songti", fontSize=10.5, leading=15, alignment=TA_CENTER, spaceAfter=4),
-    "h1":     ParagraphStyle("h1", fontName="SongtiB", fontSize=13.5, leading=19, spaceBefore=16, spaceAfter=7, keepWithNext=1),
-    "h2":     ParagraphStyle("h2", fontName="SongtiB", fontSize=11.5, leading=16, spaceBefore=11, spaceAfter=5, keepWithNext=1),
-    "body":   ParagraphStyle("body", fontName="Songti", fontSize=10.5, leading=17.5, alignment=TA_JUSTIFY,
-                             wordWrap="CJK", firstLineIndent=21, spaceAfter=4),
-    "body0":  ParagraphStyle("body0", parent=None, fontName="Songti", fontSize=10.5, leading=17.5,
-                             alignment=TA_JUSTIFY, wordWrap="CJK", spaceAfter=4),
-    "li":     ParagraphStyle("li", fontName="Songti", fontSize=10.5, leading=17, alignment=TA_JUSTIFY,
-                             wordWrap="CJK", leftIndent=16, spaceAfter=3),
-    "cell":   ParagraphStyle("cell", fontName="Songti", fontSize=9, leading=12.5, wordWrap="CJK"),
-    "cellh":  ParagraphStyle("cellh", fontName="SongtiB", fontSize=9, leading=12.5, alignment=TA_CENTER, wordWrap="CJK"),
-}
+pdfmetrics.registerFont(TTFont("Songti", "/System/Library/Fonts/Supplemental/Songti.ttc", subfontIndex=0))
+pdfmetrics.registerFont(TTFont("SongtiB", "/System/Library/Fonts/Supplemental/Songti.ttc", subfontIndex=1))
+registerFontFamily("Songti", normal="Songti", bold="SongtiB", italic="Songti", boldItalic="SongtiB")
+registerFontFamily("Times-Roman", normal="Times-Roman", bold="Times-Bold",
+                   italic="Times-Italic", boldItalic="Times-Bold")
+
+# WinAnsi(Latin-1 扩展)能覆盖的非 ASCII 字符 — 之外的字符回退到宋体
+WINANSI_EXTRA = set("–—''\u2018\u2019\u201c\u201d…•‚„†‡ˆ‰Š‹ŒŽ™š›œžŸƒ±×÷§©®°µ¼½¾")
 
 
-def esc(t: str) -> str:
-    t = t.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-    t = t.replace("\u2013", "-")                      # 宋体无 en-dash 字形
-    t = t.replace("\u2079", "")                       # ⁹ 由 ×10⁹ 组合处理
-    t = re.sub(r"×10\^?9", "×10<super>9</super>", t) if "^" in t else t
-    t = t.replace("×10/L", "×10<super>9</super>/L")   # 上标 9 缺字形, 改标签
-    t = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", t)
-    t = re.sub(r"(?<!\*)\*([^*]+?)\*(?!\*)", r"<i>\1</i>", t)
-    return t
+def make_esc(latin: bool):
+    """构造 esc(): Markdown 行内格式 + 字符兜底。latin=True 时非 WinAnsi 字符包宋体标签。"""
+
+    def wrap_foreign(t: str) -> str:
+        if not latin:
+            return t
+        out = []
+        for c in t:
+            if ord(c) > 0x7F and c not in WINANSI_EXTRA:
+                out.append(f'<font name="Songti">{c}</font>')
+            else:
+                out.append(c)
+        return "".join(out)
+
+    def esc(t: str) -> str:
+        t = t.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+        t = t.replace("\u2079", "")
+        t = t.replace("×10/L", "×10<super>9</super>/L")   # 宋体缺 ⁹ 字形, 上下文修正
+        t = wrap_foreign(t)
+        t = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", t)
+        t = re.sub(r"(?<!\*)\*([^*]+?)\*(?!\*)", r"<i>\1</i>", t)
+        return t
+
+    return esc
 
 
-def make_table(rows):
+def make_styles(lang: str):
+    if lang == "zh":
+        body_f, head_f, cell_f = "Songti", "SongtiB", "Songti"
+        body_kw = dict(fontSize=10.5, leading=17.5, wordWrap="CJK", firstLineIndent=21)
+        cell_kw = dict(fontSize=9, leading=12.5, wordWrap="CJK")
+        title_kw = dict(fontSize=17, leading=25)
+    else:
+        body_f, head_f, cell_f = "Times-Roman", "Times-Bold", "Times-Roman"
+        body_kw = dict(fontSize=10.5, leading=15.2)
+        cell_kw = dict(fontSize=9, leading=12)
+        title_kw = dict(fontSize=16.5, leading=21)
+    return {
+        "title": ParagraphStyle("title", fontName=head_f, alignment=TA_CENTER, spaceAfter=8, **title_kw),
+        "author": ParagraphStyle("author", fontName=body_f, fontSize=10.5, leading=15, alignment=TA_CENTER, spaceAfter=4),
+        "h1": ParagraphStyle("h1", fontName=head_f, fontSize=13.5 if lang == "zh" else 13, leading=19,
+                             spaceBefore=16, spaceAfter=7, keepWithNext=1),
+        "h2": ParagraphStyle("h2", fontName=head_f, fontSize=11.5 if lang == "zh" else 11, leading=16,
+                             spaceBefore=11, spaceAfter=5, keepWithNext=1),
+        "body": ParagraphStyle("body", fontName=body_f, alignment=TA_JUSTIFY, spaceAfter=4, **body_kw),
+        "body0": ParagraphStyle("body0", fontName=body_f, alignment=TA_JUSTIFY, spaceAfter=4,
+                                **{k: v for k, v in body_kw.items() if k != "firstLineIndent"}),
+        "li": ParagraphStyle("li", fontName=body_f, alignment=TA_JUSTIFY, leftIndent=16, spaceAfter=3,
+                             **{k: v for k, v in body_kw.items() if k != "firstLineIndent"}),
+        "cell": ParagraphStyle("cell", fontName=cell_f, alignment=TA_JUSTIFY, **cell_kw),
+        "cellh": ParagraphStyle("cellh", fontName=head_f, alignment=TA_CENTER, **cell_kw),
+    }
+
+
+def make_table(rows, S, esc):
     ncol = len(rows[0])
-    # 列宽按内容最大长度加权, 表格总宽 = 可用宽
     lens = [max(len(r[c]) for r in rows) for c in range(ncol)]
     tot = sum(lens)
     widths = [max(AVAIL * l / tot, 55) for l in lens]
@@ -83,13 +116,28 @@ def make_table(rows):
 
 def footer(canv, doc):
     canv.saveState()
-    canv.setFont("Songti", 9)
+    canv.setFont("Times-Roman" if doc._lang == "en" else "Songti", 9)
     canv.drawCentredString(PAGE_W / 2, 34, str(canv.getPageNumber()))
     canv.restoreState()
 
 
 def main():
-    lines = MD.read_text().splitlines()
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--lang", choices=["zh", "en"], default="zh")
+    ap.add_argument("--input", default=None)
+    ap.add_argument("--output", default=None)
+    args = ap.parse_args()
+
+    md = ROOT / "paper" / ("paper_en.md" if args.lang == "en" else "paper_zh.md")
+    out = ROOT / "paper" / ("paper_en.pdf" if args.lang == "en" else "paper_zh.pdf")
+    if args.input:
+        md = Path(args.input)
+    if args.output:
+        out = Path(args.output)
+
+    esc = make_esc(args.lang == "en")
+    S = make_styles(args.lang)
+    lines = md.read_text().splitlines()
     story = []
     i = 0
     while i < len(lines):
@@ -112,7 +160,7 @@ def main():
                 if not all(re.fullmatch(r":?-{3,}:?", c) for c in cells):
                     rows.append(cells)
                 i += 1
-            tbl = make_table(rows)
+            tbl = make_table(rows, S, esc)
             group = [tbl, Spacer(1, 8)]
             if story and isinstance(story[-1], Paragraph) and story[-1].style.name in ("h1", "h2"):
                 group.insert(0, story.pop())          # 标题与表格绑定, 防孤行标题
@@ -123,7 +171,7 @@ def main():
             continue
         elif re.match(r"^\d+\. ", ln) or ln.startswith("- "):
             story.append(Paragraph(esc(ln), S["li"]))
-        elif ln.startswith("**作者**"):
+        elif ln.startswith("**作者**") or ln.startswith("**Authors**"):
             story.append(Paragraph(esc(ln), S["author"]))
         elif ln.startswith("*") and ln.endswith("*") and not ln.startswith("**"):
             story.append(Paragraph("<i>" + esc(ln.strip("*")) + "</i>", S["body0"]))
@@ -132,14 +180,19 @@ def main():
             story.append(Paragraph(esc(ln), st))
         i += 1
 
-    doc = BaseDocTemplate(str(OUT), pagesize=A4,
-                          leftMargin=MARGIN, rightMargin=MARGIN, topMargin=MARGIN, bottomMargin=52,
-                          title="面向中文医疗智能体工具调用的分级故障恢复：评测基准与错误驱动的数据合成",
-                          author="（待定）", subject="MedGuard-FC：中文医疗工具调用故障恢复评测与安全微调",
-                          creator="medguard-fc")
+    zh_meta = dict(title="面向中文医疗智能体工具调用的分级故障恢复：评测基准与错误驱动的数据合成",
+                   author="（待定）",
+                   subject="MedGuard-FC：中文医疗工具调用故障恢复评测与安全微调")
+    en_meta = dict(title="MedGuard-FC: Benchmarking and Teaching Graded Failure Recovery for Tool-Calling Medical Agents",
+                   author="(to be determined)",
+                   subject="MedGuard-FC: benchmark and error-driven data synthesis for graded tool-failure recovery in medical agents")
+    meta = en_meta if args.lang == "en" else zh_meta
+    doc = BaseDocTemplate(str(out), pagesize=A4,
+                          leftMargin=MARGIN, rightMargin=MARGIN, topMargin=MARGIN, bottomMargin=52, **meta)
+    doc._lang = args.lang
     doc.addPageTemplates([PageTemplate(id="main", frames=[Frame(MARGIN, 52, AVAIL, PAGE_H - MARGIN - 52)], onPage=footer)])
     doc.build(story)
-    print("PDF 生成:", OUT)
+    print("PDF 生成:", out)
 
 
 if __name__ == "__main__":
