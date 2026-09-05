@@ -5,6 +5,19 @@
 **先读 [PLAN.md](./PLAN.md)**——它定义了细分场景、双轴指标（任务解决率 × 危险动作率）、
 六个实施阶段、阶段一→二的毕业 Gate、产出物清单和风险边界。
 
+## 📄 论文（初稿）
+
+| 版本 | 阅读 |
+|---|---|
+| English (9 pages) | [paper_en.pdf](./paper/paper_en.pdf) |
+| 中文 (8 页) | [paper_zh.pdf](./paper/paper_zh.pdf) |
+
+《MedGuard-FC: Benchmarking and Teaching Graded Failure Recovery for Tool-Calling Medical Agents》
+——10 配置对照实验 + 错误驱动数据合成 + 评测基准。核心数字：4B-v12 微调
+A2 85.8% [81.0, 90.1]（置信区间与 8B 基线 [69.0, 80.6] 不相交），B 22.4%→6.0%。
+
+<a href="./paper/paper_en.pdf"><img src="./paper/preview/paper_en_p1.png" width="420" alt="English paper, page 1"></a>
+
 ## 快速事实
 
 - 假设：分级故障恢复数据能同时提升"解决率"和"安全率"
@@ -52,9 +65,13 @@ notes/             实验记录：每个实验一行——改了什么、双轴�
 - [ ] 阶段 3：本地训练
   - [x] **4B 子集（1,260 轨迹）已完成** → [notes/02_sft_results.md](notes/02_sft_results.md)
     （v2 口径：A1 51.4→67.9 / A2 33.2→73.0 / B 22.4→16.3，三轴同赢，≈8B 原始水平）
-  - [x] **8B 同子集训练进行中**（目的：同底座配对验证配方泛化性 + 给租卡决策提供信号，约 15h）
-  - [ ] 视 8B 结果决定：租 4090 跑 8B 全量（Gate 终对比）
-- [ ] 阶段 4：评估与消融
-  - [x] 4B 子集消融（vs 4B/8B 基线）已进 notes/02
-  - [ ] 数据规模消融（1,260 vs 11,000 轨迹）与数据 v2 迭代（medium 扩容 + 参数回填增强）
-- [ ] 阶段 5：产出与交付（Gate 审查 → 阶段二立项）
+  - [x] **8B 同子集对照 = 阴性结果**（A2 +0.5 / B -0.1 / A1 -4.8）→ [notes/03_8b_results.md](notes/03_8b_results.md)
+    （配方增益随底座强度递减；A1 回退机制定位为 SFT 配比副作用）
+- [ ] 阶段 4：数据 v2 与规模对照
+  - [x] 数据 v2 定向合成 5,099 轨迹（medium 具体化 2,707 / normal 质量增强 2,392）→ 10,198 样本
+  - [x] **4B × v12 子集：A2 85.8 越 Gate 线 / B 腰斩至 6.0** → [notes/04_v12_results.md](notes/04_v12_results.md)
+  - [x] 8B-v12@3k salvage 方向信号（A1 82.1 修复外溢 / A2 79.4 / B 9.9）
+  - [ ] 8B × v12 全量（4090 租卡包已备：[autodl/README_AutoDL.md](autodl/README_AutoDL.md)）
+- [ ] 阶段 5：产出与交付
+  - [x] **论文初稿**（中英双语 + PDF）：[paper/](paper/) · 补强全记录 → [notes/05_conclusion_paper.md](notes/05_conclusion_paper.md)
+  - [ ] 8B 全量结果回填 + 参考文献核对 + 图 1/图 2
